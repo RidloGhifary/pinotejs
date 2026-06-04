@@ -7,9 +7,8 @@ import type {
 } from "../types";
 
 export const COMMENT_EXPORT_SCHEMA_VERSION = 1;
-export const COMMENT_EXPORT_LIBRARY_NAME =
-  "@ridloghfry/web-feedback-layer-core";
-export const COMMENT_EXPORT_LIBRARY_VERSION = "0.1.0";
+export const COMMENT_EXPORT_LIBRARY_NAME = "Pinote";
+export const COMMENT_EXPORT_LIBRARY_VERSION = "0.1.1";
 
 export interface CreateCommentExportInput {
   comments: LocalComment[];

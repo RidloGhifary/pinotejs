@@ -1,5 +1,5 @@
 {
-  "name": "@pinote/demo-react",
+  "name": "@pinotejs/demo-react",
   "private": true,
   "version": "0.1.0",
   "type": "module",
@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "react": "^19.2.7",
-    "pinote": "workspace:*",
+    "pinotejs": "workspace:*",
     "react-dom": "^19.2.7"
   }
 }

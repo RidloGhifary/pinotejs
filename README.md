@@ -1,51 +1,64 @@
 # Pinote
 
-Pinote is a framework-agnostic JavaScript library for adding Figma-style feedback and annotations directly on top of any website or web app.
+A lightweight JavaScript feedback layer for adding Figma-style comments to any website.
 
-It works with React, Next.js, Vue, Nuxt, Angular, Svelte, SvelteKit, Solid, Astro, Laravel, and plain HTML - as long as it runs in the browser.
+Pinote allows you to add a floating comment layer on top of any web application. Users can enable comment mode, click on UI elements, and leave localized feedback that stays anchored even if the layout reflows or the window is resized.
 
-## Key Features
-
-- **Comment Mode**: Enable a specialized mode to capture UI elements.
-- **Intelligent Anchoring**: Pins attach to DOM elements using stable selectors and relative percentage offsets. Pins move automatically when layout reflows or window resizes.
-- **Local Persistence**: Comments are stored in `localStorage` scoped by projectId.
-- **Cross-Page Support**: Comments are automatically filtered by the current URL pathname.
-- **JSON Export**: Download all feedback for offline sharing.
 - **Framework Agnostic**: Pure Vanilla JS engine that works anywhere.
-- **React Wrapper**: First-class support for React and Next.js.
+- **First-class React Support**: Includes components and hooks for React and Next.js.
+- **Local by Default**: Uses `localStorage` and JSON export without requiring a server.
+
+## Features
+
+- **Precise Targeting**: Comments attach to DOM elements using stable selectors and relative percentage offsets.
+- **Dynamic Anchoring**: Pins follow moved or resized elements automatically.
+- **Local Persistence**: Comments are stored in the browser, scoped by project ID.
+- **Cross-Page Support**: Comments are automatically separated by URL pathname.
+- **JSON Export**: Download all feedback for sharing with developers or designers.
+- **Lightweight**: Minimal footprint and easy to integrate.
 
 ## Installation
 
 ```bash
-# Using pnpm
-pnpm add pinote
-
 # Using npm
-npm install pinote
+npm install pinotejs
+
+# Using pnpm
+pnpm add pinotejs
+
+# Using yarn
+yarn add pinotejs
 ```
 
-## Quick Start (Vanilla JS)
+## Quick Start
+
+### Vanilla JavaScript
+
+Use Pinote in any DOM-based framework (Vue, Svelte, Angular, etc.) or plain HTML.
 
 ```javascript
-import { createPinote } from "pinote";
-import "pinote/style.css";
+import { createPinote } from "pinotejs";
+import "pinotejs/style.css";
 
-const pinote = createPinote({
-  storageKey: "my-project",
+const feedbackLayer = createPinote({
+  storageKey: "my-project-id",
 });
 
-pinote.mount();
+// Mount the UI layer
+feedbackLayer.mount();
 ```
 
-## Quick Start (React)
+### React / Next.js
+
+Pinote provides a thin React wrapper around the core engine.
 
 ```tsx
-import { PinoteProvider, PinoteToolbar, PinoteLayer } from "pinote/react";
-import "pinote/style.css";
+import { PinoteProvider, PinoteToolbar, PinoteLayer } from "pinotejs/react";
+import "pinotejs/style.css";
 
 function App() {
   return (
-    <PinoteProvider storageKey="my-project">
+    <PinoteProvider storageKey="my-project-id">
       <PinoteToolbar />
       <YourAppContent />
       <PinoteLayer />
@@ -54,35 +67,80 @@ function App() {
 }
 ```
 
-## Development
+> **Note for Next.js App Router**: Wrap your layout or specific page in a Client Component when using Pinote components, or ensure they are mounted only on the client.
 
-```bash
-pnpm install
-pnpm build # Builds the package
-pnpm dev:react   # Runs the React demo
-pnpm dev:vanilla # Runs the Vanilla demo
-```
+## API Reference
 
-## Local Testing
+### Vanilla API (`pinotejs`)
 
-To test the library in an external project before publishing to npm:
+#### `createPinote(options)`
+Initializes a new Pinote instance.
+- `options.storageKey` (string): Unique ID for local storage scoping.
+- `options.ignoreSelector` (string): CSS selector for elements that should not be clickable.
 
-1. **Pack the package**:
-   ```bash
-   pnpm pack
-   ```
-2. **Install in your project**:
-   Navigate to your external project and install the generated `.tgz` file:
-   ```bash
-   pnpm add /path/to/pinote/packages/pinote/pinote-0.1.0.tgz
-   ```
+#### `instance.mount()`
+Injects the toolbar and comment layer into the DOM.
 
-## Known Limitations (MVP)
+#### `instance.unmount()`
+Removes the UI layer and cleans up all event listeners and observers.
 
-- **Local Only**: Data is stored in the browser. No cloud sync or real-time collaboration.
-- **Browser-Only**: Does not work in non-DOM environments (SSR, Node.js).
-- **Canvas/Shadow DOM**: May not work perfectly with complex Canvas UIs or closed Shadow DOMs.
+#### `instance.enableCommentMode()`
+Programmatically turns on comment mode.
+
+#### `instance.disableCommentMode()`
+Programmatically turns off comment mode.
+
+#### `instance.exportComments()`
+Triggers a JSON download of all comments in the project.
+
+### React API (`pinotejs/react`)
+
+#### `<PinoteProvider>`
+The context provider that manages the engine lifecycle. Accepts the same options as `createPinote`.
+
+#### `<PinoteToolbar>`
+The built-in floating toolbar with toggle and export controls.
+
+#### `<PinoteLayer>`
+The visual layer that renders comment pins and popovers. (Optional: `PinoteProvider` can render this automatically).
+
+#### `usePinote()`
+A hook to access the current state and methods:
+- `isCommentModeEnabled`: boolean
+- `comments`: All project comments
+- `currentPageComments`: Comments for the current path
+- `toggleCommentMode()`: Function to toggle mode
+- `exportComments()`: Function to trigger JSON export
+
+## Configuration
+
+| Option | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `storageKey` | `string` | `"default"` | Used to isolate comments in localStorage. |
+| `ignoreSelector` | `string` | `undefined` | Additional CSS selectors to ignore during click capture. |
+| `onStateChange` | `function` | `undefined` | Callback triggered when internal state updates. |
+
+## Data Export
+
+The exported JSON file contains:
+- Full project metadata.
+- Comment counts (total, open, resolved).
+- List of pages with comments.
+- Raw comment data with anchoring metadata and relative positioning.
+
+## Limitations
+
+- **Local Only**: In the current MVP, data is stored in the browser and can be exported as JSON.
+- **Browser-Only**: Requires a DOM environment; not compatible with Node.js/SSR environments.
+- **Visibility**: Uses a high z-index (`2147483647`), but may be affected by other elements with equal priority.
+
+## Contributing
+
+1. Clone the repo: `git clone https://github.com/RidloGhifary/pinote.git`
+2. Install dependencies: `pnpm install`
+3. Build the package: `pnpm build`
+4. Run demos: `pnpm dev:react` or `pnpm dev:vanilla`
 
 ## License
 
-MIT
+MIT © [Ridlo Ghifary](https://github.com/RidloGhifary)

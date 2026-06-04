@@ -1,8 +1,8 @@
-import { createPinote } from "pinote";
-import "pinote/style.css";
+import { createPinote } from "pinotejs";
+import "pinotejs/style.css";
 
-const pinote = createPinote({
+const feedbackLayer = createPinote({
   storageKey: "vanilla-demo",
 });
 
-pinote.mount();
+feedbackLayer.mount();

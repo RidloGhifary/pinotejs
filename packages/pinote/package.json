@@ -1,7 +1,28 @@
 {
-  "name": "pinote",
-  "version": "0.1.0",
-  "description": "Framework-agnostic comment layer for any website, with first-class React support.",
+  "name": "pinotejs",
+  "version": "0.1.1",
+  "description": "Pinote is a lightweight JavaScript feedback layer for adding Figma-style comments to any website.",
+  "keywords": [
+    "pinotejs",
+    "feedback-layer",
+    "comment-layer",
+    "annotations",
+    "website-feedback",
+    "figma-style-comments",
+    "design-review",
+    "javascript",
+    "react",
+    "nextjs"
+  ],
+  "homepage": "https://github.com/RidloGhifary/pinote#readme",
+  "bugs": {
+    "url": "https://github.com/RidloGhifary/pinote/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/RidloGhifary/pinote"
+  },
+  "license": "MIT",
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
@@ -23,7 +44,9 @@
   },
   "files": [
     "dist",
-    "README.md"
+    "README.md",
+    "LICENSE",
+    "package.json"
   ],
   "sideEffects": [
     "**/*.css"
@@ -31,7 +54,7 @@
   "scripts": {
     "build": "vite build && tsc -p tsconfig.build.json",
     "typecheck": "tsc --noEmit",
-    "test": "vitest run"
+    "test": "vitest run --environment jsdom"
   },
   "peerDependencies": {
     "react": ">=18.0.0",

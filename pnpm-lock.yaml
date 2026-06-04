@@ -56,7 +56,7 @@ importers:
 
   apps/demo-react:
     dependencies:
-      pinote:
+      pinotejs:
         specifier: workspace:*
         version: link:../../packages/pinote
       react:
@@ -68,7 +68,7 @@ importers:
 
   apps/demo-vanilla:
     dependencies:
-      pinote:
+      pinotejs:
         specifier: workspace:*
         version: link:../../packages/pinote
     devDependencies:

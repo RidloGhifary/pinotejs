@@ -5,8 +5,8 @@ import {
   type LocalComment,
   usePinote,
   PinoteToolbar as BuiltInPinoteToolbar,
-} from "pinote/react";
-import "pinote/style.css";
+} from "pinotejs/react";
+import "pinotejs/style.css";
 
 const DEMO_PAGES = [
   { path: "/", label: "Overview" },
@@ -293,8 +293,8 @@ function PlaygroundContent() {
           <div className="cardIcon">💾</div>
           <h3>Local Storage</h3>
           <p>
-            Your comments stay on your machine. No backend required for this
-            local feedback loop.
+            Your comments stay on your machine and export cleanly when you are
+            ready to share them.
           </p>
         </div>
         <div className="card">
