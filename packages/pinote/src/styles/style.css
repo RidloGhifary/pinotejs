@@ -1,0 +1,85 @@
+/* react-comment-library-workspace/style.css */
+
+.pinote-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  background: rgba(248, 250, 252, 0.96);
+  backdrop-filter: blur(8px);
+  border: 1px solid #d7dee8;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.15);
+}
+
+.pinote-status,
+.pinote-counter {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  padding: 0 10px;
+  border: 1px solid #ccd6e2;
+  border-radius: 6px;
+  color: #475467;
+  background: #ffffff;
+  font-size: 13px;
+}
+
+.pinote-status.is-active {
+  border-color: #9fc0ff;
+  color: #194a9f;
+  background: #eaf2ff;
+}
+
+.pinote-button-primary,
+.pinote-button-secondary {
+  min-height: 34px;
+  padding: 0 14px;
+  border: 0;
+  border-radius: 6px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.pinote-button-primary {
+  color: #ffffff;
+  background: #1f6feb;
+}
+
+.pinote-button-primary:hover {
+  background: #1a5cbf;
+}
+
+.pinote-button-secondary {
+  color: #344054;
+  background: #edf1f6;
+}
+
+.pinote-button-secondary:hover {
+  background: #e2e8f0;
+}
+
+/* Overlay & Panel Overrides (Optional hooks) */
+.pinote-panel {
+  /* These will supplement the inline styles */
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.pinote-textarea:focus {
+  outline: 2px solid #2563eb;
+  border-color: transparent;
+}
+
+.pinote-button {
+  transition: opacity 0.2s;
+}
+
+.pinote-button:hover {
+  opacity: 0.9;
+}
+
+.pinote-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
