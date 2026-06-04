@@ -1,6 +1,6 @@
 {
   "name": "pinotejs",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Pinote is a lightweight JavaScript feedback layer for adding Figma-style comments to any website.",
   "keywords": [
     "pinotejs",
@@ -14,13 +14,13 @@
     "react",
     "nextjs"
   ],
-  "homepage": "https://github.com/RidloGhifary/pinote#readme",
+  "homepage": "https://pinotejs.ridlolabs.net",
   "bugs": {
     "url": "https://github.com/RidloGhifary/pinote/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/RidloGhifary/pinote"
+    "url": "git+https://github.com/RidloGhifary/pinote.git"
   },
   "license": "MIT",
   "type": "module",

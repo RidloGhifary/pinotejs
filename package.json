@@ -6,7 +6,9 @@
   "scripts": {
     "dev:react": "pnpm --filter @pinotejs/demo-react dev",
     "dev:vanilla": "pnpm --filter demo-vanilla dev",
+    "dev:landing": "pnpm --filter @pinotejs/landing dev",
     "build": "pnpm -r build",
+    "build:landing": "pnpm --filter @pinotejs/landing build",
     "build:package": "cd packages/pinote && pnpm build",
     "pack:package": "cd packages/pinote && pnpm build && pnpm pack",
     "pack:dry-run": "cd packages/pinote && npm pack --dry-run",
