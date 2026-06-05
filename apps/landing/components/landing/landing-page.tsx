@@ -108,12 +108,48 @@ const comingSoonFrameworks = [
 ];
 
 const roadmap = [
-  "Team collaboration",
-  "Backend adapters",
-  "Realtime comments",
-  "Screenshot attachments",
-  "Browser extension",
-  "GitHub integration",
+  {
+    icon: Code2,
+    title: "Framework integrations",
+    description: "Vue, Svelte, Angular, and Astro support built on the same DOM-first core.",
+    tags: ["Vue", "Svelte", "Angular", "Astro"],
+  },
+  {
+    icon: Database,
+    title: "Backend adapters",
+    description: "Optional persistence layers for REST API, Supabase, and Firebase workflows.",
+    tags: ["REST API", "Supabase", "Firebase"],
+  },
+  {
+    icon: CopyCheck,
+    title: "Team collaboration",
+    description: "Shared projects with members, roles, and review spaces for product teams.",
+    tags: ["Projects", "Members", "Roles"],
+  },
+  {
+    icon: MessageCircle,
+    title: "Realtime feedback",
+    description: "Live comment updates and presence for synchronous design and QA reviews.",
+    tags: ["Live comments", "Presence"],
+  },
+  {
+    icon: FileJson,
+    title: "Visual context",
+    description: "Screenshot capture and page metadata to make every note easier to reproduce.",
+    tags: ["Screenshots", "Metadata"],
+  },
+  {
+    icon: GitPullRequest,
+    title: "Workflow integrations",
+    description: "Issue and notification handoff for GitHub, Jira, and Slack.",
+    tags: ["GitHub", "Jira", "Slack"],
+  },
+  {
+    icon: Globe2,
+    title: "Browser extension",
+    description: "Comment on websites without installing Pinote in the target codebase first.",
+    tags: ["No install", "Web reviews"],
+  },
 ];
 
 const vanillaCode = `import { createPinote } from "pinotejs";
@@ -139,9 +175,12 @@ export function App() {
 function Logo() {
   return (
     <div className="flex items-center gap-3">
-      <div className="grid h-9 w-9 place-items-center rounded-xl border border-white/12 bg-white text-slate-950 shadow-lg shadow-white/10">
-        <MessageCircle className="h-4.5 w-4.5" />
-      </div>
+      <img
+        alt=""
+        aria-hidden="true"
+        className="h-9 w-9 rounded-xl shadow-lg shadow-white/10"
+        src="/pinote-logo.svg"
+      />
       <span className="text-sm font-semibold tracking-tight text-white">Pinote</span>
     </div>
   );
@@ -636,10 +675,10 @@ function CodeSection() {
           viewport={{ once: true, margin: "-80px" }}
           whileInView="visible"
         >
-          <motion.div variants={fadeUp}>
+          <motion.div className="min-w-0" variants={fadeUp}>
             <CodeBlock code={vanillaCode} label="Vanilla JavaScript" />
           </motion.div>
-          <motion.div variants={fadeUp}>
+          <motion.div className="min-w-0" variants={fadeUp}>
             <CodeBlock code={reactCode} label="React / Next.js" />
           </motion.div>
         </motion.div>
@@ -704,9 +743,9 @@ function RoadmapSection() {
     <section className="px-4 py-24 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
         <SectionHeader
-          description="The core stays focused while future layers unlock richer review workflows."
-          eyebrow="Roadmap"
-          title="A focused foundation with room to grow"
+          description="Pinote starts with local-first UI feedback, but the goal is to become a complete visual feedback workflow for modern web teams."
+          eyebrow="Future updates"
+          title="What’s coming next"
         />
         <motion.div
           className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
@@ -716,11 +755,27 @@ function RoadmapSection() {
           whileInView="visible"
         >
           {roadmap.map((item) => (
-            <Card className="flex items-center gap-4 p-5" key={item}>
-              <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl border border-white/10 bg-white/[0.05]">
-                <CopyCheck className="h-5 w-5 text-blue-200" />
+            <Card className="flex min-h-64 flex-col p-5" key={item.title}>
+              <div className="mb-5 flex items-center justify-between gap-4">
+                <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl border border-white/10 bg-white/[0.05]">
+                  <item.icon className="h-5 w-5 text-blue-200" />
+                </div>
+                <span className="rounded-full border border-blue-300/15 bg-blue-300/[0.08] px-2.5 py-1 text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-blue-100/75">
+                  Planned
+                </span>
               </div>
-              <p className="font-medium text-white">{item}</p>
+              <h3 className="text-lg font-semibold tracking-tight text-white">{item.title}</h3>
+              <p className="mt-3 flex-1 text-sm leading-6 text-slate-400">{item.description}</p>
+              <div className="mt-5 flex flex-wrap gap-2">
+                {item.tags.map((tag) => (
+                  <span
+                    className="rounded-full border border-white/10 bg-black/20 px-2.5 py-1 text-xs text-slate-300"
+                    key={tag}
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
             </Card>
           ))}
         </motion.div>
